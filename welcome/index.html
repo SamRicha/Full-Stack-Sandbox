@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .welcome {
+            position: relative;
+            z-index: 1;
+        }
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh);
+                opacity: 0.7;
+            }
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome">
+        <h1>Welcome to My Website</h1>
+        <p>Enjoy the animated background!</p>
+    </div>
+
+    <script>
+        function createParticles() {
+            for (let i = 0; i < 30; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+                document.body.appendChild(particle);
+
+                // Remove particle after animation
+                particle.addEventListener('animationend', () => particle.remove());
+            }
+        }
+        setInterval(createParticles, 500);
+    </script>
+</body>
+</html>
